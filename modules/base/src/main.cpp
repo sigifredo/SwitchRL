@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 #endif
 
     Principal p;
-    p.setWindowTitle("WSS");
+    p.setWindowTitle("SwitchRL");
     p.show();
 
     return app.exec();

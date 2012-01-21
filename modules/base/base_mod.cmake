@@ -25,17 +25,17 @@ ${HDRS}
 ${MOC_SRCS}
 ${SRCS}
 )
-set(WSS ${BASE_DIR}/src/main.cpp)
+set(SRL ${BASE_DIR}/src/main.cpp)
 
 if(${CMAKE_HOST_SYSTEM} MATCHES "Windows")
-	LIST(APPEND WSS resources/wss.rc)
+	LIST(APPEND SRL resources/SwitchRL.rc)
 endif()
 
-add_executable( wss WIN32 ${WSS} )
+add_executable( SwitchRL WIN32 ${SRL} )
 
 target_link_libraries( base GDGui ${QT_LIBRARIES})
-target_link_libraries( wss base )
+target_link_libraries( SwitchRL base )
 
-install( TARGETS wss base
+install( TARGETS SwitchRL base
          RUNTIME DESTINATION ${INSTALL_DIR}bin
          LIBRARY DESTINATION ${INSTALL_DIR}bin )

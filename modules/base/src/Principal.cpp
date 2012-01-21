@@ -83,14 +83,14 @@ Principal::Principal(QWidget * pPadre):
 void Principal::acercaDe()
 {
     QString sDescripcion = QString::fromUtf8("");
-    GUI::About ab("WSS", "0.4", sDescripcion);
+    GUI::About ab("SwitchRL", "0.5.5", sDescripcion);
     ab.exec();
 }
 
 void Principal::agregar()
 {
     QInputDialog id(this);
-    id.setLabelText("Servidor:");
+    id.setLabelText("realmlist:");
     if(id.exec() == QDialog::Accepted && id.textValue().trimmed() != "")
     {
         if(!guardarServidor(id.textValue().trimmed()))
