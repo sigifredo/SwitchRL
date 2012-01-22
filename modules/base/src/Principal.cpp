@@ -81,14 +81,14 @@ Principal::Principal(QWidget * pPadre):
     // Transparencia (Solo Windows 7)
     #ifdef _WIN32
       // verificarmos que esté activada la transparencia en el sistema
-      if(GUI::QtWin::ifCompositionEnabled())
+      if(GUI::QtWin::isCompositionEnabled())
       {
           this->setAttribute(Qt::WA_TranslucentBackground);
           this->setAttribute(Qt::WA_NoSystemBackground, false);
           QPalette pal = this->palette();
           QColor bg = pal.window().color();
           bg.setAlpha(0x0);
-          pal.setColor(QPalette::Windows, bg);
+          pal.setColor(QPalette::Window, bg);
           this->setPalette(pal);
           this->ensurePolished(); // workaround Oxygen filling the background
           this->setAttribute(Qt::WA_StyledBackground, false);
