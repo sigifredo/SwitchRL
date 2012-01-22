@@ -93,18 +93,18 @@ pAboutLayout->addItem(pSpacer);
 Este programa es una utilidad libre para la administración sencilla de servidores para WoW.\n\
 Copyright (C) 2012 Sigifredo Escobar Gómez.\n\
 \n\
-Este programa es software libre: usted puede redistribuirlo y/o modificarlo \n\
-bajo los términos de la Licencia Pública General GNU publicada \n\
-por la Fundación para el Software Libre, ya sea la versión 3 \n\
+Este programa es software libre: usted puede redistribuirlo y/o modificarlo\n\
+bajo los términos de la Licencia Pública General GNU publicada\n\
+por la Fundación para el Software Libre, ya sea la versión 3\n\
 de la Licencia, o (a su elección) cualquier versión posterior.\n\
 \n\
-Este programa se distribuye con la esperanza de que sea útil, pero \n\
-SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita \n\
-MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. \n\
-Consulte los detalles de la Licencia Pública General GNU para obtener \n\
+Este programa se distribuye con la esperanza de que sea útil, pero\n\
+SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita\n\
+MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO.\n\
+Consulte los detalles de la Licencia Pública General GNU para obtener\n\
 una información más detallada.\n\
 \n\
-Debería haber recibido una copia de la Licencia Pública General GNU \n\
+Debería haber recibido una copia de la Licencia Pública General GNU\n\
 junto a este programa.\n\
 En caso contrario, consulte <http://www.gnu.org/licenses/>.\n\
 ");
