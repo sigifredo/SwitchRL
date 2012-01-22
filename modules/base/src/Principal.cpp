@@ -15,7 +15,7 @@
 
 // Windows
 #ifdef _WIN32
-#    include<windows.h>
+#  include<windows.h>
 #endif
 
 // GfifDev
@@ -23,7 +23,7 @@
 #include<GUIAbout.hpp>
 
 #ifndef elif
-#  define elif	else if
+#  define elif		else if
 #endif
 
 Principal::Principal(QWidget * pPadre):
@@ -60,37 +60,30 @@ Principal::Principal(QWidget * pPadre):
     llenarLista();
 
     // Transparencia (Solo Windows 7)
-#ifdef _WIN32
-    // verificamos que esté activada la transparencia en el sistema
-    if(GUI::QtWin::isCompositionEnabled())
-    {
-        this->setAttribute(Qt::WA_TranslucentBackground);
-        this->setAttribute(Qt::WA_NoSystemBackground, false);
-        QPalette pal = this->palette();
-        QColor bg = pal.window().color();
-        bg.setAlpha(0x0);
-        pal.setColor(QPalette::Window, bg);
-        this->setPalette(pal);
-        this->ensurePolished(); // workaround Oxygen filling the background
-        this->setAttribute(Qt::WA_StyledBackground, false);
+    #ifdef _WIN32
+      // verificarmos que esté activada la transparencia en el sistema
+      if(GUI::QtWin::ifCompositionEnabled())
+      {
+          this->setAttribute(Qt::WA_TranslucentBackground);
+          this->setAttribute(Qt::WA_NoSystemBackground, false);
+          QPalette pal = this->palette();
+          QColor bg = pal.window().color();
+          bg.setAlpha(0x0);
+          pal.setColor(QPalette::Windows, bg);
+          this->setPalette(pal);
+          this->ensurePolished(); // workaround Oxygen filling the background
+          this->setAttribute(Qt::WA_StyledBackground, false);
 
-        GUI::QtWin::extendFrameIntoClientArea(this);
-        this->setContentsMargins(0, 0, 0, 0);
-    }
-#endif
+          GUI::QtWin::extendFrameIntoClientArea(this);
+          this->setContentsMargins(0, 0, 0, 0);
+      }
+    #endif
 }
 
 void Principal::acercaDe()
 {
-    QString sDescripcion = QString::fromUtf8("\
-SwitchRL es una utilidad creada para todas aquellas personas que\n\
-juegan en mas de un servidor de WoW. El programa administra de\n\
-forma autom�tica el archivo realmlist para que el jugador no se\n\
-tenga que preocupar por editar archivos para cambiar de servidor.\n\
-\n\
-Este programa es distribuido bajo lidencia GPL3 no hace parte de\n\
-Blizzard, ni modifica ninguna funcionalidad del juego.");
-    GUI::About ab("SwitchRL", "0.5.5", sDescripcion);
+    QString sDescription = "SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma automática el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.";
+    GUI::About ab("SwitchRL", "0.5.5", sDescription);
     ab.exec();
 }
 
@@ -123,16 +116,16 @@ void Principal::iniciarJuego()
 {
     if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && configurarJuego(_sDirectorio, _pServidores->currentItem()->text()))
     {
-        #ifdef _WIN32
-        QString sComando = (_sDirectorio.replace("/", "\\") + "\\Wow.exe");
+#ifdef _WIN32
+        QString sComando = _sDirectorio.replace("/", "\\") + "\\Wow.exe";
         ShellExecute(NULL, TEXT("open"), TEXT(sComando.toStdString().c_str()), NULL, NULL, SW_SHOWNORMAL);
-        #elif defined(linux)
+#elif defined(linux)
         QString sComando = "wine " + _sDirectorio + "/Wow.exe &";
         system(sComando.toStdString().c_str());
-        #endif
+#endif
     }
     elif(_pServidores->currentItem() != NULL)
-        QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar escribir el archivo realmlist.wtf. Es posible que se requieran privilegios de administrador � que el idioma del juego no se encuentra soportado en la actualidad.");
+        QMessageBox::critical(this, "Error", "Ha ocurrido u problema al intentar escribir el archivo \"realmlist.wtf\". Es posible que se requieran privilegios de administrador ó que el idioma del juego no se encuentre soportado en la actualidad.");
 }
 
 void Principal::llenarLista()
@@ -154,6 +147,6 @@ void Principal::cambiarDirectorio()
         _pDirectorio->setText("WoW: " + _sDirectorio);
 
         if(!guardarDirectorio(_sDirectorio))
-            QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar guardar el directorio. Es posible que se requieran privilegios de administrador.");
+            QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intntar guardar el directorio. es posible que se requieran privilegios de administrador.");
     }
 }

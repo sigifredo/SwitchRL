@@ -90,7 +90,7 @@ pAboutLayout->addItem(pSpacer);
         _pLicenceTextEdit = new QTextEdit(pLicenceTab);
         _pLicenceTextEdit->setReadOnly(true);
         QString str1 = QString::fromUtf8("\
-Este programa es una utilidad libre para la administrasión sensilla de servidores para WoW.\n\
+Este programa es una utilidad libre para la administración sencilla de servidores para WoW.\n\
 Copyright (C) 2012 Sigifredo Escobar Gómez.\n\
 \n\
 Este programa es software libre: usted puede redistribuirlo y/o modificarlo \n\
