@@ -91,6 +91,7 @@ Principal::Principal(QWidget * pPadre):
     _pLayout->addItem(_pSpacer, 6, 1, 1, 1);
     _pLayout->addWidget(_pAyuda, 6, 2, 1, 1);
 
+    _pDirectorios->setAlternatingRowColors(true);
     _pServidores->setAlternatingRowColors(true);
     llenarListaDirectorios();
     llenarListaServidores();
@@ -119,7 +120,7 @@ Principal::Principal(QWidget * pPadre):
 void Principal::acercaDe()
 {
     QString sDescription = "SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma automática el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.";
-    GUI::About ab("SwitchRL", "0.5.6", sDescription);
+    GUI::About ab("SwitchRL", "1.0.1", sDescription);
     ab.exec();
 }
 
@@ -179,7 +180,7 @@ void Principal::iniciarJuego()
 {
     QString sDir;
 
-    if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && _pDirectorios->currentItem() != NULL && _pDirectorios->currentItem()->text() != "" && IO::configurarJuego(sDir = IO::leerDirectorio(_pDirectorios->currentItem()->text()), _pServidores->currentItem()->text()))
+    if(_pServidores->currentItem() != NULL && _pDirectorios->currentItem() != NULL && _pDirectorios->currentItem()->text() != "" && IO::configurarJuego(sDir = IO::leerDirectorio(_pDirectorios->currentItem()->text()), _pServidores->currentItem()->text()))
     {
 #ifdef _WIN32
         QString sComando = sDir.replace("/", "\\") + "\\Wow.exe";
