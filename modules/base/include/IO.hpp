@@ -27,6 +27,9 @@
 class QString;
 class QStringList;
 
+namespace IO
+{
+
 /**
  * \brief Elimina un servidor.
  *
@@ -36,10 +39,12 @@ class QStringList;
 BASE_EXPORT bool eliminarServidor(const QString &sServidor);
 
 /**
- * \brief Leemos el directorio donde está el juego.
+ * \brief Elimina un directorio de juego.
+ *
+ * @param sDirectorio Nombre del directorio a eliminar.
  *
  */
-BASE_EXPORT QString leerDirectorio();
+BASE_EXPORT bool eliminarDirectorio(const QString &Directorio);
 
 /**
 * \brief Guardamos el directorio donde está el juego.
@@ -58,6 +63,22 @@ BASE_EXPORT bool guardarDirectorio(const QString &sDirectorio);
 BASE_EXPORT bool guardarServidor(const QString &sServidor);
 
 /**
+ * \brief Leemos el directorio donde está el juego.
+ *
+ * @param directorios Lista de directorios.
+ *
+ */
+BASE_EXPORT QString leerDirectorio(const QString &directorio);
+
+/**
+ * \brief Leemos el directorio donde está el juego.
+ *
+ * @param directorios Lista de directorios.
+ *
+ */
+BASE_EXPORT void leerDirectorios(QStringList &directorios);
+
+/**
  * \brief Entregamos la lista de los servidores disponibles.
  *
  * @param servidores Lista de servidores.
@@ -73,5 +94,7 @@ BASE_EXPORT void leerServidores(QStringList &servidores);
 *
 */
 BASE_EXPORT bool configurarJuego(QString sDirectorio, QString sServidor);
+
+}
 
 #endif

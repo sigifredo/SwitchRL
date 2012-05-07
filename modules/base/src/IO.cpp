@@ -25,29 +25,74 @@
 #include<QDir>
 #include<QDebug>
 
-#define IO_PATH		QDir::currentPath() + "/rls/"
-#define elif		else if
+#define RLS_PATH		QDir::currentPath() + "/rls/"
+#define DIR_PATH		QDir::currentPath() + "/dir/"
+#ifndef elif
+#  define elif		else if
+#endif
 
-bool eliminarServidor(const QString &sServidor)
+using namespace IO;
+
+bool IO::eliminarDirectorio(const QString &sDirectorio)
 {
-    return QFile::remove(IO_PATH + sServidor + ".rls");
+    return QFile::remove(DIR_PATH + sDirectorio + ".dir");
 }
 
-QString leerDirectorio()
+bool IO::eliminarServidor(const QString &sServidor)
 {
-    QFile dir(IO_PATH + "directorio");
-    if(!dir.exists()) return "";
-    elif(dir.open(QIODevice::ReadOnly)) return QString(dir.readAll());
+    return QFile::remove(RLS_PATH + sServidor + ".rls");
 }
 
-bool guardarDirectorio(const QString &sDirectorio)
+QString IO::leerDirectorio(const QString &directorio)
 {
-    QDir d(IO_PATH);
-    if(!d.exists() && !d.mkdir(IO_PATH)) return false;
+    QFile f(DIR_PATH + "/" + directorio + ".dir");
+    
+    if(f.exists() && f.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&f);
+        return in.readAll();
+    }
+    else
+        return QString();
+}
 
-    QFile f(IO_PATH + "directorio");
+void IO::leerDirectorios(QStringList &directorios)
+{
+    QDir d(DIR_PATH);
+    if(!d.exists()) return;
 
-    if(f.open(QIODevice::WriteOnly))
+    QStringList dirs = d.entryList();
+
+    QStringListIterator it(dirs);
+
+    while(it.hasNext())
+    {
+        QString directorio = it.next();
+        
+        if(directorio.right(4) == ".dir")
+            directorios << directorio.left(directorio.length()-4);
+    }
+}
+
+bool IO::guardarDirectorio(const QString &sDirectorio)
+{
+    QDir d(DIR_PATH);
+    if(!d.exists() && !d.mkdir(DIR_PATH)) return false;
+
+    QString::const_iterator it;
+    if(sDirectorio.right(1) == "/")
+        it = sDirectorio.end()-2;
+    else
+        it = sDirectorio.end()-1;
+
+    QString sDir(".dir");
+    for(; *it != '/'; sDir.prepend(*it--));
+
+    QFile f(DIR_PATH + sDir);
+
+    if(f.exists())
+        return true;
+    elif(f.open(QIODevice::WriteOnly))
     {
         QTextStream os(&f);
         os << sDirectorio;
@@ -57,12 +102,12 @@ bool guardarDirectorio(const QString &sDirectorio)
     else return false;
 }
 
-bool guardarServidor(const QString &sServidor)
+bool IO::guardarServidor(const QString &sServidor)
 {
-    QDir d(IO_PATH);
-    if(!d.exists() && !d.mkdir(IO_PATH)) return false;
+    QDir d(RLS_PATH);
+    if(!d.exists() && !d.mkdir(RLS_PATH)) return false;
     
-    QFile f(IO_PATH + sServidor + ".rls");
+    QFile f(RLS_PATH + sServidor + ".rls");
     if(f.exists())
         return true;
     elif(f.open(QIODevice::WriteOnly))
@@ -75,9 +120,9 @@ bool guardarServidor(const QString &sServidor)
         return false;
 }
 
-void leerServidores(QStringList &servidores)
+void IO::leerServidores(QStringList &servidores)
 {
-    QDir d(IO_PATH);
+    QDir d(RLS_PATH);
     if(!d.exists()) return;
 
     QStringList serv = d.entryList();
@@ -93,7 +138,7 @@ void leerServidores(QStringList &servidores)
     }
 }
 
-bool configurarJuego(QString sDirectorio, QString sServidor)
+bool IO::configurarJuego(QString sDirectorio, QString sServidor)
 {
     #define N_IDIOMAS	2
     QString idiomas[] = { "esES", "esMX" };

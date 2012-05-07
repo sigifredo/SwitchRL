@@ -50,33 +50,50 @@ Principal::Principal(QWidget * pPadre):
 {
     QGridLayout * _pLayout = new QGridLayout(this);
 
-    _sDirectorio = leerDirectorio();
-    QString sDir = _sDirectorio==""?"<directorio>":_sDirectorio;
+    // Sección de directorios
+    {
+        _pDirectorio = new QLabel("Directorio:", this);
+        _pDirectorios = new QListWidget(this);
+        _pAgregarDirectorio = new QPushButton(QIcon(":/SwitchRL/agregar.png"), "", this);
+        _pEliminarDirectorio = new QPushButton(QIcon(":/SwitchRL/eliminar.png"), "", this);
+    }
 
-    _pDirectorio = new Label("WoW: " + sDir, this);
-    _pAyuda = new QPushButton("?", this);
-    _pServidores = new QListWidget(this);
-    _pAgregarServidor = new QPushButton("Agregar", this);
-    _pEliminarServidor = new QPushButton("Eliminar", this);
-    _pSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    // Sección de servidores
+    {
+        _pServidor = new QLabel("Servidor:", this);
+        _pServidores = new QListWidget(this);
+        _pAgregarServidor = new QPushButton(QIcon(":/SwitchRL/agregar.png"), "", this);
+        _pEliminarServidor = new QPushButton(QIcon(":/SwitchRL/eliminar.png"), "", this);
+    }
+
     _pIniciarJuego = new QPushButton("Iniciar", this);
+    _pSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    _pAyuda = new QPushButton("?", this);
 
     connect(_pAyuda, SIGNAL(clicked()), this, SLOT(acercaDe()));
-    connect(_pAgregarServidor, SIGNAL(clicked()), this, SLOT(agregar()));
-    connect(_pEliminarServidor, SIGNAL(clicked()), this, SLOT(eliminar()));
+    connect(_pAgregarDirectorio, SIGNAL(clicked()), this, SLOT(agregarDirectorio()));
+    connect(_pEliminarDirectorio, SIGNAL(clicked()), this, SLOT(eliminarDirectorio()));
+    connect(_pAgregarServidor, SIGNAL(clicked()), this, SLOT(agregarServidor()));
+    connect(_pEliminarServidor, SIGNAL(clicked()), this, SLOT(eliminarServidor()));
     connect(_pIniciarJuego, SIGNAL(clicked()), this, SLOT(iniciarJuego()));
-    connect(_pDirectorio, SIGNAL(doubleClick()), this, SLOT(cambiarDirectorio()));
 
     _pLayout->addWidget(_pDirectorio, 0, 0, 1, 3);
-    _pLayout->addWidget(_pAyuda, 0, 3, 1, 1);
-    _pLayout->addWidget(_pServidores, 1, 0, 1, 4);
-    _pLayout->addWidget(_pAgregarServidor, 2, 0, 1, 1);
-    _pLayout->addWidget(_pEliminarServidor, 2, 1, 1, 1);
-    _pLayout->addItem(_pSpacer, 2, 2, 1, 1);
-    _pLayout->addWidget(_pIniciarJuego, 2, 3, 1, 1);
+    _pLayout->addWidget(_pDirectorios, 1, 0, 2, 3);
+    _pLayout->addWidget(_pAgregarDirectorio, 1, 4, 1, 1);
+    _pLayout->addWidget(_pEliminarDirectorio, 2, 4, 1, 1);
+
+    _pLayout->addWidget(_pServidor, 3, 0, 1, 3);
+    _pLayout->addWidget(_pServidores, 4, 0, 2, 3);
+    _pLayout->addWidget(_pAgregarServidor, 4, 4, 1, 1);
+    _pLayout->addWidget(_pEliminarServidor, 5, 4, 1, 1);
+
+    _pLayout->addWidget(_pIniciarJuego, 6, 0, 1, 1);
+    _pLayout->addItem(_pSpacer, 6, 1, 1, 1);
+    _pLayout->addWidget(_pAyuda, 6, 2, 1, 1);
 
     _pServidores->setAlternatingRowColors(true);
-    llenarLista();
+    llenarListaDirectorios();
+    llenarListaServidores();
 
     // Transparencia (Solo Windows 7)
     #ifdef _WIN32
@@ -106,66 +123,89 @@ void Principal::acercaDe()
     ab.exec();
 }
 
-void Principal::agregar()
+void Principal::agregarDirectorio()
+{
+    QString sDirectorio;
+    QFileDialog fd(this);
+    fd.setFileMode(QFileDialog::Directory);
+
+    if(fd.exec() == QDialog::Accepted && (sDirectorio = fd.selectedFiles().at(0).trimmed()) != "")
+        if(!IO::guardarDirectorio(sDirectorio))
+            QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar guardar el directorio. Es posible que se requieran privilegios de administrador.");
+        else
+        {
+            _pDirectorios->clear();
+            llenarListaDirectorios();
+        }
+}
+
+void Principal::eliminarDirectorio()
+{
+    if(_pDirectorios->currentItem() != NULL && _pDirectorios->currentItem()->text() != "" && !IO::eliminarDirectorio(_pDirectorios->currentItem()->text()))
+        QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar eliminar el directorio. Es posible que se requieran privilegios de administrador.");
+    else
+    {
+        _pDirectorios->clear();
+        llenarListaDirectorios();
+    }
+}
+
+void Principal::agregarServidor()
 {
     QInputDialog id(this);
     id.setLabelText("realmlist:");
     if(id.exec() == QDialog::Accepted && id.textValue().trimmed() != "")
-    {
-        if(!guardarServidor(id.textValue().trimmed()))
-        {
+        if(!IO::guardarServidor(id.textValue().trimmed()))
             QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar guardar el servidor. Es posible que se requieran privilegios de administrador.");
+        else
+        {
+            _pServidores->clear();
+            llenarListaServidores();
         }
-    }
-
-    _pServidores->clear();
-    llenarLista();
 }
 
-void Principal::eliminar()
+void Principal::eliminarServidor()
 {
-    if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && !eliminarServidor(_pServidores->currentItem()->text()))
+    if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && !IO::eliminarServidor(_pServidores->currentItem()->text()))
         QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar eliminar el servidor. Es posible que se requieran privilegios de administrador.");
-
-    _pServidores->clear();
-    llenarLista();
+    else
+    {
+        _pServidores->clear();
+        llenarListaServidores();
+    }
 }
 
 void Principal::iniciarJuego()
 {
-    if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && configurarJuego(_sDirectorio, _pServidores->currentItem()->text()))
+    QString sDir;
+
+    if(_pServidores->currentItem() != NULL && _pServidores->currentItem()->text() != "" && _pDirectorios->currentItem() != NULL && _pDirectorios->currentItem()->text() != "" && IO::configurarJuego(sDir = IO::leerDirectorio(_pDirectorios->currentItem()->text()), _pServidores->currentItem()->text()))
     {
 #ifdef _WIN32
-        QString sComando = _sDirectorio.replace("/", "\\") + "\\Wow.exe";
+        QString sComando = sDir.replace("/", "\\") + "\\Wow.exe";
         ShellExecute(NULL, TEXT("open"), TEXT(sComando.toStdString().c_str()), NULL, NULL, SW_SHOWNORMAL);
 #elif defined(linux)
-        QString sComando = "wine " + _sDirectorio + "/Wow.exe &";
+        QString sComando = "wine " + sDir + "/Wow.exe &";
+
         system(sComando.toStdString().c_str());
 #endif
     }
     elif(_pServidores->currentItem() != NULL)
-        QMessageBox::critical(this, "Error", "Ha ocurrido u problema al intentar escribir el archivo \"realmlist.wtf\". Es posible que se requieran privilegios de administrador ó que el idioma del juego no se encuentre soportado en la actualidad.");
+        QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar escribir el archivo \"realmlist.wtf\". Es posible que se requieran privilegios de administrador ó que el idioma del juego no se encuentre soportado en la actualidad.");
 }
 
-void Principal::llenarLista()
+void Principal::llenarListaDirectorios()
+{
+    QStringList directorios;
+    IO::leerDirectorios(directorios);
+
+    _pDirectorios->addItems(directorios);
+}
+
+void Principal::llenarListaServidores()
 {
     QStringList servidores;
-    leerServidores(servidores);
+    IO::leerServidores(servidores);
 
     _pServidores->addItems(servidores);
-}
-
-void Principal::cambiarDirectorio()
-{
-    QFileDialog fd(this);
-    fd.setFileMode(QFileDialog::DirectoryOnly);
-
-    if(fd.exec() == QDialog::Accepted)
-    {
-        _sDirectorio = fd.selectedFiles().at(0).trimmed();
-        _pDirectorio->setText("WoW: " + _sDirectorio);
-
-        if(!guardarDirectorio(_sDirectorio))
-            QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intntar guardar el directorio. es posible que se requieran privilegios de administrador.");
-    }
 }

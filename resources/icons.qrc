@@ -2,4 +2,8 @@
   <qresource prefix="GfifDev">
     <file>logo90.png</file>
   </qresource>
+  <qresource prefix="SwitchRL">
+    <file>agregar.png</file>
+    <file>eliminar.png</file>
+  </qresource>
 </RCC>

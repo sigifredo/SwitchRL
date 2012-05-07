@@ -27,7 +27,7 @@
 // Qt
 #include<QWidget>
 
-class Label;
+class QLabel;
 class QListWidget;
 class QPushButton;
 class QSpacerItem;
@@ -54,16 +54,28 @@ public slots:
     void acercaDe();
 
     /**
+     * \brief Agregamos un directorio.
+     *
+     */
+    void agregarDirectorio();
+
+    /**
+     * \brief Elimina un directorio de la lista.
+     *
+     */
+    void eliminarDirectorio();
+
+    /**
      * \brief Agregamos un servidor.
      *
      */
-    void agregar();
+    void agregarServidor();
 
     /**
      * \brief Elimina un servidor de la lista.
      *
      */
-    void eliminar();
+    void eliminarServidor();
 
     /**
      * \brief Iniciar el juego.
@@ -72,23 +84,28 @@ public slots:
     void iniciarJuego();
 
     /**
+     * \brief Llena la lista de directorios.
+     *
+     */
+    void llenarListaDirectorios();
+
+    /**
      * \brief Llena la lista de servidores.
      *
      */
-    void llenarLista();
-
-    /**
-     * \brief Cambiamos el directorio donde está guardado el juego.
-     *
-     */
-    void cambiarDirectorio();
+    void llenarListaServidores();
 
 protected:
 
     /**
-     * Mensaje que se mostrará al usuario indicando donde está el directorio.
+     * Etiqueta que indica que la lista situada a continuación corresponde a los directorios del juego.
      */
-    Label * _pDirectorio;
+    QLabel * _pDirectorio;
+
+    /**
+     * Etiqueta que indica que la lista situada a continuación corresponde a los servidores del juego.
+     */
+    QLabel * _pServidor;
 
     /**
      * Muestra el diálogo "Acerca de..."
@@ -96,9 +113,24 @@ protected:
     QPushButton * _pAyuda;
 
     /**
+     * Lista de directorios, en los cuales se encuentran las diferentes versiones del juego (WoW).
+     */
+    QListWidget * _pDirectorios;
+
+    /**
      * Lista de servidores.
      */
     QListWidget * _pServidores;
+
+    /**
+     * Botón para agregar directorio.
+     */
+    QPushButton * _pAgregarDirectorio;
+
+    /**
+     * Botón para eliminar directorio.
+     */
+    QPushButton * _pEliminarDirectorio;
 
     /**
      * Botón para agregar servidor.
@@ -119,12 +151,6 @@ protected:
      * Espaciador usado para separar los botones _pAgregarServidor y _pEliminarServidor, de _pIniciarJuego.
      */
     QSpacerItem * _pSpacer;
-
-    /**
-     * Directorio del juego.
-     */
-    QString _sDirectorio;
-
 };
 
 #endif
