@@ -18,7 +18,7 @@ About::About(const QString &sAppName, const QString &sAppVersion, const QString 
     init();
 
     _sAppName = sAppName;
-    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + sAppVersion + "</i><br>Usando la plataforma de desarrollo de GfifDev 0.3<br>Y la biblioteca de desarrollo Qt 4.7.4.0");
+    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + sAppVersion + "</i><br>Usando la plataforma de desarrollo de GfifDev 0.3<br>Y la biblioteca de desarrollo Qt " + qVersion());
     _pDescriptionLabel->setText(sDescription);
     setWindowTitle("Acerca de " + sAppName);
 }
