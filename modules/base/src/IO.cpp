@@ -28,8 +28,8 @@
 #define RLS_PATH		QDir::currentPath() + "/rls/"
 #define DIR_PATH		QDir::currentPath() + "/dir/"
 #define LNG_PATH		QDir::currentPath() + "/idiomas.txt"
-#define LNG_DEFAULT		"esES,esMX"
-#define LNG_DEFAULT_SIZE	9
+#define LNG_DEFAULT		"esES,esMX,enUS,enGB"
+#define LNG_DEFAULT_SIZE	19
 #ifndef elif
 #  define elif		else if
 #endif
