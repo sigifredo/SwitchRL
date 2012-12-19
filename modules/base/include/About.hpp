@@ -26,13 +26,8 @@ public:
     /**
      * \brief Constructor de la clase.
      *
-     * @param sAppName Nombre de la aplicación.
-     * @param sAppVersion Versión de la aplicación.
-     * @param sDescription Descripción de la aplicación.
-     * @param pParent Puntero al objeto padre.
-     *
      */
-    About(const QString &sAppName, const QString &sAppVersion, const QString &sDescription, QWidget * pParent = 0);
+    About(QWidget * pParent = 0);
 
     /**
      * \brief Agregamos un nuevo autor.

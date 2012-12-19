@@ -6,8 +6,8 @@ FILE(STRINGS "${BASE_DIR}/include/version.hpp" SWRL_HEADER REGEX "^#define SWRL_
 STRING(REGEX REPLACE "^.*SWRL_VERSION \"([0-9]+).*$" "\\1" SWRL_VERSION_MAJOR "${SWRL_HEADER}")
 STRING(REGEX REPLACE "^.*SWRL_VERSION \"[0-9]+\\.([0-9]+).*$" "\\1" SWRL_VERSION_MINOR  "${SWRL_HEADER}")
 STRING(REGEX REPLACE "^.*SWRL_VERSION \"[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" SWRL_VERSION_REV "${SWRL_HEADER}")
+SET(SWRL_VERSION_STRING "${SWRL_VERSION_MAJOR}.${SWRL_VERSION_MINOR}.${SWRL_VERSION_REV}")
 
-set(SWRL_VERSION_STRING "${SWRL_VERSION_MAJOR}.${SWRL_VERSION_MINOR}.${SWRL_VERSION_REV}")
 
 set(HDRS
 ${BASE_DIR}/include/IO.hpp
@@ -47,8 +47,8 @@ endif()
 
 add_executable( SwitchRL WIN32 ${SRL} )
 
-target_link_libraries( base ${QT_LIBRARIES})
-target_link_libraries( SwitchRL base )
+target_link_libraries( base ${QT_LIBRARIES} )
+target_link_libraries( SwitchRL base ${QT_LIBRARIES} )
 
 SET_TARGET_PROPERTIES( base PROPERTIES VERSION ${SWRL_VERSION_STRING} )
 SET_TARGET_PROPERTIES( base PROPERTIES SOVERSION ${SWRL_VERSION_MAJOR} )

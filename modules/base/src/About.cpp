@@ -1,6 +1,7 @@
 
 // Own
 #include<About.hpp>
+#include<IO.hpp>
 #include<QtWin.hpp>
 
 // Qt
@@ -10,21 +11,21 @@
 #include<QTabWidget>
 #include<QDialogButtonBox>
 
-About::About():
+About::About(QWidget * pParent):
     QDialog(pParent)
 {
     init();
 
     QStringList idiomas;
-    leerIdiomas(idiomas);
+    IO::leerIdiomas(idiomas);
 
-    QString sDescription = QString::fromUtf8("SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom�tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.\n\nIdiomas soportados:\n" + idiomas.join(","));
+    QString sDescription = QString::fromUtf8("SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma automática el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.\n\nIdiomas soportados:\n") + idiomas.join(",");
 
 
     _sAppName = "SwitchRL";
-    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + SWRL_VERSION "</i><br>Usando la biblioteca de desarrollo Qt " + qVersion());
+    _pAppInfoLabel->setText("<font size=\"5\">" + _sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + SWRL_VERSION "</i><br>Usando la biblioteca de desarrollo Qt " + qVersion());
     _pDescriptionLabel->setText(sDescription);
-    setWindowTitle("Acerca de " + sAppName);
+    setWindowTitle("Acerca de " + _sAppName);
 }
 
 void About::addAuthor(const QString &sName, const QString &sTask, const QString &sEmail, const QString &sWebAddress)

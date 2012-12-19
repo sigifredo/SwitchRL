@@ -7,9 +7,9 @@
 
 #ifndef BASE_VERSION_HPP
 
-#define SWRL_VERSION	"1.1.1"
-#define SWRL_MAJOR	1
-#define SWRL_MINOR	1
-#define SWRL_REVISION	1
+#define SWRL_VERSION "1.1.1"
+#define SWRL_MAJOR 1
+#define SWRL_MINOR 1
+#define SWRL_REVISION 1
 
 #endif

@@ -116,7 +116,7 @@ Principal::Principal(QWidget * pPadre):
 
 void Principal::acercaDe()
 {
-    About ab;
+    About ab(this);
     ab.exec();
 }
 
