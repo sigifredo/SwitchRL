@@ -1,19 +1,19 @@
 /*
-    Este programa es una utilidad libre para la administraci√≥n sencilla de servidores para WoW.
-    Copyright (C) 2012 Sigifredo Escobar G√≥mez.
+    Este programa es una utilidad libre para la administraciÛn sencilla de servidores para WoW.
+    Copyright (C) 2012 Sigifredo Escobar GÛmez (sigifredo89@gmail.com).
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo
-    bajo los t√©rminos de la Licencia P√∫blica General GNU publicada
-    por la Fundaci√≥n para el Software Libre, ya sea la versi√≥n 3
-    de la Licencia, o (a su elecci√≥n) cualquier versi√≥n posterior.
+    bajo los tÈrminos de la Licencia P˙blica General GNU publicada
+    por la FundaciÛn para el Software Libre, ya sea la versiÛn 3
+    de la Licencia, o (a su elecciÛn) cualquier versiÛn posterior.
 
     Este programa se distribuye con la esperanza de que sea √∫til, pero
-    SIN GARANT√çA ALGUNA; ni siquiera la garant√≠a impl√≠cita
-    MERCANTIL o de APTITUD PARA UN PROP√ìSITO DETERMINADO.
-    Consulte los detalles de la Licencia P√∫blica General GNU para obtener
-    una informaci√≥n m√°s detallada.
+    SIN GARANTÕA ALGUNA; ni siquiera la garantÌa implÌcita
+    MERCANTIL o de APTITUD PARA UN PROP”SITO DETERMINADO.
+    Consulte los detalles de la Licencia P˙blica General GNU para obtener
+    una informaciÛn m·s detallada.
 
-    Deber√≠a haber recibido una copia de la Licencia P√∫blica General GNU
+    Deber· haber recibido una copia de la Licencia P˙blica General GNU
     junto a este programa.
     En caso contrario, consulte <http://www.gnu.org/licenses/>.
 */
@@ -49,7 +49,7 @@ BASE_EXPORT bool eliminarDirectorio(const QString &Directorio);
 /**
 * \brief Guardamos el directorio donde est√° el juego.
 *
-* @param sDirectorio Ruta del directorio donde est√° el juego.
+* @param sDirectorio Ruta del directorio donde est· el juego.
 *
 */
 BASE_EXPORT bool guardarDirectorio(const QString &sDirectorio);
@@ -63,7 +63,7 @@ BASE_EXPORT bool guardarDirectorio(const QString &sDirectorio);
 BASE_EXPORT bool guardarServidor(const QString &sServidor);
 
 /**
- * \brief Leemos el directorio donde est√° el juego.
+ * \brief Leemos el directorio donde est· el juego.
  *
  * @param directorios Lista de directorios.
  *
@@ -71,7 +71,7 @@ BASE_EXPORT bool guardarServidor(const QString &sServidor);
 BASE_EXPORT QString leerDirectorio(const QString &directorio);
 
 /**
- * \brief Leemos el directorio donde est√° el juego.
+ * \brief Leemos el directorio donde est· el juego.
  *
  * @param directorios Lista de directorios.
  *
@@ -87,9 +87,9 @@ BASE_EXPORT void leerDirectorios(QStringList &directorios);
 BASE_EXPORT void leerServidores(QStringList &servidores);
 
 /**
-* \brief Escribe el archivo realmlist.wtf con el servidor pasado a la funci√≥n.
+* \brief Escribe el archivo realmlist.wtf con el servidor pasado a la funciÛn.
 *
-* @param sdirectorio Ruta al directorio donde est√° el juego.
+* @param sdirectorio Ruta al directorio donde est· el juego.
 * @param sServidor Servidor a agregar en el realmlist.wtf
 *
 */

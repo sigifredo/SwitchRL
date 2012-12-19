@@ -1,19 +1,19 @@
 /*
-    Este programa es una utilidad libre para la administraci√≥n sencilla de servidores para WoW.
-    Copyright (C) 2012 Sigifredo Escobar G√≥mez.
+    Este programa es una utilidad libre para la administraciÛn sencilla de servidores para WoW.
+    Copyright (C) 2012 Sigifredo Escobar GÛmez (sigifredo89@gmail.com).
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo
-    bajo los t√©rminos de la Licencia P√∫blica General GNU publicada
-    por la Fundaci√≥n para el Software Libre, ya sea la versi√≥n 3
-    de la Licencia, o (a su elecci√≥n) cualquier versi√≥n posterior.
+    bajo los tÈrminos de la Licencia P˙blica General GNU publicada
+    por la FundaciÛn para el Software Libre, ya sea la versiÛn 3
+    de la Licencia, o (a su elecciÛn) cualquier versiÛn posterior.
 
     Este programa se distribuye con la esperanza de que sea √∫til, pero
-    SIN GARANT√çA ALGUNA; ni siquiera la garant√≠a impl√≠cita
-    MERCANTIL o de APTITUD PARA UN PROP√ìSITO DETERMINADO.
-    Consulte los detalles de la Licencia P√∫blica General GNU para obtener
-    una informaci√≥n m√°s detallada.
+    SIN GARANTÕA ALGUNA; ni siquiera la garantÌa implÌcita
+    MERCANTIL o de APTITUD PARA UN PROP”SITO DETERMINADO.
+    Consulte los detalles de la Licencia P˙blica General GNU para obtener
+    una informaciÛn m·s detallada.
 
-    Deber√≠a haber recibido una copia de la Licencia P√∫blica General GNU
+    Deber· haber recibido una copia de la Licencia P˙blica General GNU
     junto a este programa.
     En caso contrario, consulte <http://www.gnu.org/licenses/>.
 */

@@ -1,19 +1,19 @@
 /*
-    Este programa es una utilidad libre para la administraci√≥n sencilla de servidores para WoW.
-    Copyright (C) 2012 Sigifredo Escobar G√≥mez.
+    Este programa es una utilidad libre para la administraciÛn sencilla de servidores para WoW.
+    Copyright (C) 2012 Sigifredo Escobar GÛmez (sigifredo89@gmail.com).
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo
-    bajo los t√©rminos de la Licencia P√∫blica General GNU publicada
-    por la Fundaci√≥n para el Software Libre, ya sea la versi√≥n 3
-    de la Licencia, o (a su elecci√≥n) cualquier versi√≥n posterior.
+    bajo los tÈrminos de la Licencia P˙blica General GNU publicada
+    por la FundaciÛn para el Software Libre, ya sea la versiÛn 3
+    de la Licencia, o (a su elecciÛn) cualquier versiÛn posterior.
 
     Este programa se distribuye con la esperanza de que sea √∫til, pero
-    SIN GARANT√çA ALGUNA; ni siquiera la garant√≠a impl√≠cita
-    MERCANTIL o de APTITUD PARA UN PROP√ìSITO DETERMINADO.
-    Consulte los detalles de la Licencia P√∫blica General GNU para obtener
-    una informaci√≥n m√°s detallada.
+    SIN GARANTÕA ALGUNA; ni siquiera la garantÌa implÌcita
+    MERCANTIL o de APTITUD PARA UN PROP”SITO DETERMINADO.
+    Consulte los detalles de la Licencia P˙blica General GNU para obtener
+    una informaciÛn m·s detallada.
 
-    Deber√≠a haber recibido una copia de la Licencia P√∫blica General GNU
+    Deber· haber recibido una copia de la Licencia P˙blica General GNU
     junto a este programa.
     En caso contrario, consulte <http://www.gnu.org/licenses/>.
 */
@@ -48,7 +48,7 @@ public:
 public slots:
 
     /**
-     * \brief Muestra el cuadro de di√°logo "Acerca de..."
+     * \brief Muestra el cuadro de di·logo "Acerca de..."
      *
      */
     void acercaDe();
@@ -98,17 +98,17 @@ public slots:
 protected:
 
     /**
-     * Etiqueta que indica que la lista situada a continuaci√≥n corresponde a los directorios del juego.
+     * Etiqueta que indica que la lista situada a continuaciÛn corresponde a los directorios del juego.
      */
     QLabel * _pDirectorio;
 
     /**
-     * Etiqueta que indica que la lista situada a continuaci√≥n corresponde a los servidores del juego.
+     * Etiqueta que indica que la lista situada a continuaciÛn corresponde a los servidores del juego.
      */
     QLabel * _pServidor;
 
     /**
-     * Muestra el di√°logo "Acerca de..."
+     * Muestra el di·logo "Acerca de..."
      */
     QPushButton * _pAyuda;
 
@@ -123,27 +123,27 @@ protected:
     QListWidget * _pServidores;
 
     /**
-     * Bot√≥n para agregar directorio.
+     * BotÛn para agregar directorio.
      */
     QPushButton * _pAgregarDirectorio;
 
     /**
-     * Bot√≥n para eliminar directorio.
+     * BotÛn para eliminar directorio.
      */
     QPushButton * _pEliminarDirectorio;
 
     /**
-     * Bot√≥n para agregar servidor.
+     * BotÛn para agregar servidor.
      */
     QPushButton * _pAgregarServidor;
 
     /**
-     * Bot√≥n para eliminar servidor.
+     * BotÛn para eliminar servidor.
      */
     QPushButton * _pEliminarServidor;
 
     /**
-     * Bot√≥n para iniciar el juego.
+     * BotÛn para iniciar el juego.
      */
     QPushButton * _pIniciarJuego;
 

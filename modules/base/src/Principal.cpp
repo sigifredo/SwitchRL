@@ -1,19 +1,19 @@
 /*
-    Este programa es una utilidad libre para la administraci√≥n sencilla de servidores para WoW.
-    Copyright (C) 2012 Sigifredo Escobar G√≥mez.
+    Este programa es una utilidad libre para la administraciÛn sencilla de servidores para WoW.
+    Copyright (C) 2012 Sigifredo Escobar GÛmez (sigifredo89@gmail.com).
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo
-    bajo los t√©rminos de la Licencia P√∫blica General GNU publicada
-    por la Fundaci√≥n para el Software Libre, ya sea la versi√≥n 3
-    de la Licencia, o (a su elecci√≥n) cualquier versi√≥n posterior.
+    bajo los tÈrminos de la Licencia P˙blica General GNU publicada
+    por la FundaciÛn para el Software Libre, ya sea la versiÛn 3
+    de la Licencia, o (a su elecciÛn) cualquier versiÛn posterior.
 
     Este programa se distribuye con la esperanza de que sea √∫til, pero
-    SIN GARANT√çA ALGUNA; ni siquiera la garant√≠a impl√≠cita
-    MERCANTIL o de APTITUD PARA UN PROP√ìSITO DETERMINADO.
-    Consulte los detalles de la Licencia P√∫blica General GNU para obtener
-    una informaci√≥n m√°s detallada.
+    SIN GARANTÕA ALGUNA; ni siquiera la garantÌa implÌcita
+    MERCANTIL o de APTITUD PARA UN PROP”SITO DETERMINADO.
+    Consulte los detalles de la Licencia P˙blica General GNU para obtener
+    una informaciÛn m·s detallada.
 
-    Deber√≠a haber recibido una copia de la Licencia P√∫blica General GNU
+    Deber· haber recibido una copia de la Licencia P˙blica General GNU
     junto a este programa.
     En caso contrario, consulte <http://www.gnu.org/licenses/>.
 */
@@ -50,7 +50,7 @@ Principal::Principal(QWidget * pPadre):
 {
     QGridLayout * _pLayout = new QGridLayout(this);
 
-    // Secci√≥n de directorios
+    // SecciÛn de directorios
     {
         _pDirectorio = new QLabel("Directorio:", this);
         _pDirectorios = new QListWidget(this);
@@ -58,7 +58,7 @@ Principal::Principal(QWidget * pPadre):
         _pEliminarDirectorio = new QPushButton(QIcon(":/SwitchRL/eliminar.png"), "", this);
     }
 
-    // Secci√≥n de servidores
+    // SecciÛn de servidores
     {
         _pServidor = new QLabel("Servidor:", this);
         _pServidores = new QListWidget(this);
@@ -98,7 +98,7 @@ Principal::Principal(QWidget * pPadre):
 
     // Transparencia (Solo Windows 7)
     #ifdef _WIN32
-      // verificarmos que est√© activada la transparencia en el sistema
+      // verificarmos que est· activada la transparencia en el sistema
       if(GUI::QtWin::isCompositionEnabled())
       {
           this->setAttribute(Qt::WA_TranslucentBackground);
@@ -119,7 +119,7 @@ Principal::Principal(QWidget * pPadre):
 
 void Principal::acercaDe()
 {
-    QString sDescription = "SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom√°tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.";
+    QString sDescription = "SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom·tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.";
     GUI::About ab("SwitchRL", "1.0.1", sDescription);
     ab.exec();
 }
@@ -192,7 +192,7 @@ void Principal::iniciarJuego()
 #endif
     }
     elif(_pServidores->currentItem() != NULL)
-        QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar escribir el archivo \"realmlist.wtf\". Es posible que se requieran privilegios de administrador √≥ que el idioma del juego no se encuentre soportado en la actualidad.");
+        QMessageBox::critical(this, "Error", "Ha ocurrido un problema al intentar escribir el archivo \"realmlist.wtf\". Es posible que se requieran privilegios de administrador o que el idioma del juego no se encuentre soportado en la actualidad.");
 }
 
 void Principal::llenarListaDirectorios()
