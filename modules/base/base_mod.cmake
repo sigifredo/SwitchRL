@@ -1,7 +1,13 @@
 set(BASE_DIR ${CMAKE_CURRENT_LIST_DIR})
 include_directories(${BASE_DIR}/include)
 
-# add_definitions( -static )
+FILE(STRINGS "${BASE_DIR}/include/version.hpp" SWRL_HEADER REGEX "^#define SWRL_VERSION \"[^\"]*\"$")
+
+STRING(REGEX REPLACE "^.*SWRL_VERSION \"([0-9]+).*$" "\\1" SWRL_VERSION_MAJOR "${SWRL_HEADER}")
+STRING(REGEX REPLACE "^.*SWRL_VERSION \"[0-9]+\\.([0-9]+).*$" "\\1" SWRL_VERSION_MINOR  "${SWRL_HEADER}")
+STRING(REGEX REPLACE "^.*SWRL_VERSION \"[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" SWRL_VERSION_REV "${SWRL_HEADER}")
+
+set(SWRL_VERSION_STRING "${SWRL_VERSION_MAJOR}.${SWRL_VERSION_MINOR}.${SWRL_VERSION_REV}")
 
 set(HDRS
 ${BASE_DIR}/include/IO.hpp
@@ -43,6 +49,9 @@ add_executable( SwitchRL WIN32 ${SRL} )
 
 target_link_libraries( base ${QT_LIBRARIES})
 target_link_libraries( SwitchRL base )
+
+SET_TARGET_PROPERTIES( base PROPERTIES VERSION ${SWRL_VERSION_STRING} )
+SET_TARGET_PROPERTIES( base PROPERTIES SOVERSION ${SWRL_VERSION_MAJOR} )
 
 install( TARGETS SwitchRL base
          RUNTIME DESTINATION ${INSTALL_DIR}bin

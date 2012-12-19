@@ -21,6 +21,8 @@
 #ifndef BASE_EXPORT_HPP
 #define BASE_EXPORT_HPP
 
+#include <version.hpp>
+
 #ifdef _WIN32
 #  ifdef base_EXPORTS
 #    define BASE_EXPORT		__declspec( dllexport )

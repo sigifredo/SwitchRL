@@ -117,7 +117,7 @@ Principal::Principal(QWidget * pPadre):
 void Principal::acercaDe()
 {
     QString sDescription = QString::fromUtf8("SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma automática el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.");
-    About ab("SwitchRL", "1.1.1", sDescription);
+    About ab("SwitchRL", SWRL_VERSION, sDescription);
     ab.exec();
 }
 
