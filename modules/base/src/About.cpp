@@ -10,13 +10,19 @@
 #include<QTabWidget>
 #include<QDialogButtonBox>
 
-About::About(const QString &sAppName, const QString &sAppVersion, const QString &sDescription, QWidget * pParent):
+About::About():
     QDialog(pParent)
 {
     init();
 
-    _sAppName = sAppName;
-    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + sAppVersion + "</i><br>Usando la biblioteca de desarrollo Qt " + qVersion());
+    QStringList idiomas;
+    leerIdiomas(idiomas);
+
+    QString sDescription = QString::fromUtf8("SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom�tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.\n\nIdiomas soportados:\n" + idiomas.join(","));
+
+
+    _sAppName = "SwitchRL";
+    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + SWRL_VERSION "</i><br>Usando la biblioteca de desarrollo Qt " + qVersion());
     _pDescriptionLabel->setText(sDescription);
     setWindowTitle("Acerca de " + sAppName);
 }
