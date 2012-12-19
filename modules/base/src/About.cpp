@@ -16,7 +16,7 @@ About::About(const QString &sAppName, const QString &sAppVersion, const QString 
     init();
 
     _sAppName = sAppName;
-    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + sAppVersion + "</i><br>Usando la plataforma de desarrollo de GfifDev 0.3<br>Y la biblioteca de desarrollo Qt " + qVersion());
+    _pAppInfoLabel->setText("<font size=\"5\">" + sAppName + "</font><br><i>" + QString::fromUtf8("Versión ") + sAppVersion + "</i><br>Usando la biblioteca de desarrollo Qt " + qVersion());
     _pDescriptionLabel->setText(sDescription);
     setWindowTitle("Acerca de " + sAppName);
 }
@@ -74,7 +74,7 @@ pAboutLayout->addItem(pSpacer);
         QWidget * pAuthorTab = new QWidget(_pTabWidget);
         QVBoxLayout * pAuthorsLayout = new QVBoxLayout(pAuthorTab);
         _pAuthorsLabel = new QLabel(pAuthorTab);
-        addAuthor("Sigifredo Escobar Gómez", "Desarrollador", "sigifredo@gfifdev.com", "www.gfifdev.com");
+        addAuthor("Sigifredo Escobar Gómez", "Desarrollador", "sigifredo89@gmail.com", "sigifredo89.blogspot.com");
         pAuthorsLayout->addWidget(_pAuthorsLabel);
         QSpacerItem * pSpacer = new QSpacerItem(10, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
         pAuthorsLayout->addItem(pSpacer);
