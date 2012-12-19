@@ -1,30 +1,31 @@
-/*
-    Este programa es una utilidad libre para la administraciÛn sencilla de servidores para WoW.
-    Copyright (C) 2012 Sigifredo Escobar GÛmez (sigifredo89@gmail.com).
+Ôªø/*
+    Este programa es una utilidad libre para la administraci√≥n sencilla de servidores para WoW.
+    Copyright (C) 2012 Sigifredo Escobar G√≥mez (sigifredo89@gmail.com).
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo
-    bajo los tÈrminos de la Licencia P˙blica General GNU publicada
-    por la FundaciÛn para el Software Libre, ya sea la versiÛn 3
-    de la Licencia, o (a su elecciÛn) cualquier versiÛn posterior.
+    bajo los t√©rminos de la Licencia P√∫blica General GNU publicada
+    por la Fundaci√≥n para el Software Libre, ya sea la versi√≥n 3
+    de la Licencia, o (a su elecci√≥n) cualquier versi√≥n posterior.
 
-    Este programa se distribuye con la esperanza de que sea √∫til, pero
-    SIN GARANTÕA ALGUNA; ni siquiera la garantÌa implÌcita
-    MERCANTIL o de APTITUD PARA UN PROP”SITO DETERMINADO.
-    Consulte los detalles de la Licencia P˙blica General GNU para obtener
-    una informaciÛn m·s detallada.
+    Este programa se distribuye con la esperanza de que sea √É¬∫til, pero
+    SIN GARANT√çA ALGUNA; ni siquiera la garant√≠a impl√≠cita
+    MERCANTIL o de APTITUD PARA UN PROP√ìSITO DETERMINADO.
+    Consulte los detalles de la Licencia P√∫blica General GNU para obtener
+    una informaci√≥n m√°s detallada.
 
-    Deber· haber recibido una copia de la Licencia P˙blica General GNU
+    Deber√° haber recibido una copia de la Licencia P√∫blica General GNU
     junto a este programa.
     En caso contrario, consulte <http://www.gnu.org/licenses/>.
 */
 
 // Own
+#include<About.hpp>
 #include<IO.hpp>
 #include<Label.hpp>
 #include<Principal.hpp>
+#include<QtWin.hpp>
 
 // Qt
-#include<QDebug>
 #include<QFileDialog>
 #include<QGridLayout>
 #include<QInputDialog>
@@ -37,10 +38,6 @@
 #  include<windows.h>
 #endif
 
-// GfifDev
-#include<GUIQtWin.hpp>
-#include<GUIAbout.hpp>
-
 #ifndef elif
 #  define elif		else if
 #endif
@@ -50,7 +47,7 @@ Principal::Principal(QWidget * pPadre):
 {
     QGridLayout * _pLayout = new QGridLayout(this);
 
-    // SecciÛn de directorios
+    // Secci√≥n de directorios
     {
         _pDirectorio = new QLabel("Directorio:", this);
         _pDirectorios = new QListWidget(this);
@@ -58,7 +55,7 @@ Principal::Principal(QWidget * pPadre):
         _pEliminarDirectorio = new QPushButton(QIcon(":/SwitchRL/eliminar.png"), "", this);
     }
 
-    // SecciÛn de servidores
+    // Secci√≥n de servidores
     {
         _pServidor = new QLabel("Servidor:", this);
         _pServidores = new QListWidget(this);
@@ -98,8 +95,8 @@ Principal::Principal(QWidget * pPadre):
 
     // Transparencia (Solo Windows 7)
     #ifdef _WIN32
-      // verificarmos que est· activada la transparencia en el sistema
-      if(GUI::QtWin::isCompositionEnabled())
+      // verificarmos que est√° activada la transparencia en el sistema
+      if(QtWin::isCompositionEnabled())
       {
           this->setAttribute(Qt::WA_TranslucentBackground);
           this->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -111,7 +108,7 @@ Principal::Principal(QWidget * pPadre):
           this->ensurePolished(); // workaround Oxygen filling the background
           this->setAttribute(Qt::WA_StyledBackground, false);
 
-          GUI::QtWin::extendFrameIntoClientArea(this);
+          QtWin::extendFrameIntoClientArea(this);
           this->setContentsMargins(0, 0, 0, 0);
       }
     #endif
@@ -119,8 +116,8 @@ Principal::Principal(QWidget * pPadre):
 
 void Principal::acercaDe()
 {
-    QString sDescription = "SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom·tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.";
-    GUI::About ab("SwitchRL", "1.0.1", sDescription);
+    QString sDescription = QString::fromUtf8("SwitchRL es una utilidad creada para todas aquellas personas que\njuegan en mas de un servidor de WoW. El programa administra de\nforma autom√°tica el archivo \"realmlist.wtf\" para que el jugador no se\ntenga que preocupar por editar archivos para cambiar de servidor.\n\nEste programa es distribuido bajo licencia GPLv3, no hace parte de\nBlizzard, no modifica ninguna funcionalidad del juego.");
+    About ab("SwitchRL", "1.0.1", sDescription);
     ab.exec();
 }
 
