@@ -23,10 +23,13 @@
 
 // Qt
 #include<QDir>
-#include<QDebug>
+#include<QTextStream>
 
 #define RLS_PATH		QDir::currentPath() + "/rls/"
 #define DIR_PATH		QDir::currentPath() + "/dir/"
+#define LNG_PATH		QDir::currentPath() + "/idiomas.txt"
+#define LNG_DEFAULT		"esES,esMX"
+#define LNG_DEFAULT_SIZE	9
 #ifndef elif
 #  define elif		else if
 #endif
@@ -138,19 +141,62 @@ void IO::leerServidores(QStringList &servidores)
     }
 }
 
+bool IO::leerIdiomas(QStringList &idiomas)
+{
+    QFile f(LNG_PATH);
+
+    if(!f.exists())
+    {
+        if(f.open(QIODevice::WriteOnly))
+        {
+            char lng[] = LNG_DEFAULT;
+            for(int i = 0; i < LNG_DEFAULT_SIZE; i++)
+                f.putChar(lng[i]);
+            f.close();
+        }
+        else
+            return false;
+    }
+
+    if(f.open(QIODevice::ReadOnly))
+    {
+        char c;
+        QString lenguaje;
+
+        while(f.getChar(&c))
+            if(c == ',')
+            {
+                idiomas << lenguaje;
+                lenguaje = "";
+            }
+            else
+                lenguaje += c;
+
+        if(lenguaje != "")
+            idiomas << lenguaje;
+
+        f.close();
+
+        return true;
+    }
+    else
+        return false;
+}
+
 bool IO::configurarJuego(QString sDirectorio, QString sServidor)
 {
-    #define N_IDIOMAS	2
-    QString idiomas[] = { "esES", "esMX" };
+    QStringList idiomas;
+    if(!leerIdiomas(idiomas))
+        return false;
 
     QDir d;
     sDirectorio += "/Data/";
 
-    for(int i = 0; i < N_IDIOMAS; i++)
+    for(QStringList::iterator it = idiomas.begin(); it != idiomas.end(); ++it)
     {
-        if(d.exists(sDirectorio + idiomas[i]))
+        if(d.exists(sDirectorio + *it))
         {
-            sDirectorio += idiomas[i] + "/";
+            sDirectorio += (*it) + "/";
             break;
         }
     }
@@ -164,5 +210,6 @@ bool IO::configurarJuego(QString sDirectorio, QString sServidor)
 
         return true;
     }
-    else return false;
+    else
+        return false;
 }

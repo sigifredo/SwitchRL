@@ -87,6 +87,14 @@ BASE_EXPORT void leerDirectorios(QStringList &directorios);
 BASE_EXPORT void leerServidores(QStringList &servidores);
 
 /**
+ * \brief Entregamos la lista de los idiomas disponibles.
+ *
+ * @param servidores Lista de idiomas.
+ *
+ */
+BASE_EXPORT bool leerIdiomas(QStringList &idiomas);
+
+/**
 * \brief Escribe el archivo realmlist.wtf con el servidor pasado a la función.
 *
 * @param sdirectorio Ruta al directorio donde está el juego.
